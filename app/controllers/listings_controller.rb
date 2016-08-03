@@ -2,26 +2,43 @@ class ListingsController < ApplicationController
 	before_action :find_listing, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@listings = Listing.all
+  		@filterrific = initialize_filterrific(
+    	Listing,
+    	params[:filterrific]
+	  	) or return
+	  	@listings = @filterrific.find
+
+	  	respond_to do |format|
+	    	format.html
+	    	format.js
+  		end
 	end
 
 	def new
-		@listing = Listing.new
+		if signed_in?
+			@listing = Listing.new
+		else
+			redirect_to '/sign_in', notice: 'You are not logged in' 
+		end	
 	end
 
 	def create
-		@listing = current_user.listings.create(listing_params)
-		respond_to do |format|
-			if @listing.save
-	        	format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
-	      	else
-	        	format.html { render :new }
-	      	end
-	    end
+		if signed_in? and current_user
+			@listing = current_user.listings.create(listing_params)
+			respond_to do |format|
+				if @listing.save
+		        	format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
+		      	else
+		        	format.html { render :new }
+		      	end
+		    end
+		else
+			redirect_to '/sign_in', notice: 'You are not logged in' 
+		end    
 	end
 	
 	def edit
-	
+
 	end	
 
 	def show
@@ -47,7 +64,7 @@ class ListingsController < ApplicationController
 	private
 
 	def listing_params
-        params.require(:listing).permit(:title, :address, :price)
+        params.require(:listing).permit(:title, :address, :price, tag_ids: [])
     end
 
 

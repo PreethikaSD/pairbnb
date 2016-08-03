@@ -1,18 +1,24 @@
 
 <p>
-  <strong>title:</strong>
+  <strong>Title:</strong>
   <%= @listing.title%>
 </p>
 
 <p>
-  <strong>address:</strong>
+  <strong>Address:</strong>
   <%= @listing.address %>
 </p>
 
 <p>
-  <strong>price</strong>
+  <strong>Price</strong>
   <%= @listing.price %>
 </p>
+
+<p>
+<strong>Tag:</strong>
+<% @listing.tags.each do |tag|%>
+	<%= tag.name + ',' %>
+<% end %>	
 
 <% if current_user.id == @listing.user_id %>
 	<%= link_to 'Edit', edit_listing_path(@listing) %> 

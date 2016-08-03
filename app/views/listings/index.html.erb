@@ -1,26 +1,22 @@
-<h1>Welcome</h1>
-<%= link_to 'Create a listing', new_listing_path %><br>
+<%= form_for_filterrific @filterrific do |f| %>
+  <div>
+    Search
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed'
+    ) %>
+  </div>
+  <div>
+    <%= link_to(
+      'Reset filters',
+      reset_filterrific_url,
+    ) %>
+  </div>
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
 
-	<table class="table">
-		<tr>
-			<th> Title</th>
-			<th>Address</th>
-			<th>Price</th>
-			<th>Show</th>
-			<th>Edit</th>
-			<th>Destroy</th>
-		</tr>
-		<% @listings.each do |listing| %>
-			<tr>
-				<td><%=listing.title%></td>
-				<td><%=listing.address%></td>
-				<td><%=listing.price%></td>
-				<td><%= link_to 'Show', listing %></td>
-				<% if current_user.id == listing.user_id %>
-					<td><%= link_to "Edit", edit_listing_path(listing) %></td>
-					<td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-				<% end %>	
-			</tr>	
-		<%end%>		
-	</table>
+<%= render( partial: 'listings/list', locals: { listings: @listings } ) %>
+
+<%= link_to 'Create a listing', new_listing_path %> 
 

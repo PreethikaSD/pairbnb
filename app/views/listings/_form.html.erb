@@ -6,7 +6,10 @@
   <%= form.text_field :address%>
 
   <%= form.label :Price %>
-  <%= form.text_field :price%>
+  <%= form.text_field :price%><br>
+
+  <%= form.label :tag %>
+  <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, :item_wrapper_class => 'block' %>
 
   <%= form.submit %>
 <%end%>

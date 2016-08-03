@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.email = params[:user][:email]
 		@user.save
-		redirect_to "/"
+		redirect_to @user
 	end
 end
 
