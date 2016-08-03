@@ -1,1 +1,11 @@
 <h1>Welcome</h1>
+<% @users.each do |user| %>
+	<table>
+		<td><%=user.email%></td>
+		<td><%= link_to 'Show', user %></td>
+		<%if current_user.id == user.id %>
+			<td><%= link_to "Edit", edit_user_path(user) %></td>
+		<%end%>
+	</table>
+<%end%>		
+<%= link_to 'Go to listings', listings_path %>
