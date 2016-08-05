@@ -33,6 +33,8 @@ gem 'omniauth-facebook'
 
 gem 'filterrific'
 
+gem 'bootstrap-datepicker-rails'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

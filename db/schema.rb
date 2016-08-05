@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803062512) do
+ActiveRecord::Schema.define(version: 20160804030156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,29 @@ ActiveRecord::Schema.define(version: 20160803062512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "available_dates", force: :cascade do |t|
+    t.integer  "listing_id"
+    t.date     "booked_date"
+    t.boolean  "available"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "available_dates", ["listing_id"], name: "index_available_dates_on_listing_id", using: :btree
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "listing_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "guest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "listing_tags", force: :cascade do |t|
     t.integer  "tag_id"

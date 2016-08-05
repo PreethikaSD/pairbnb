@@ -1,12 +1,16 @@
+<% if @errors %>
+	<%= @errors %>
+<% end %>	
 <div id="filterrific_results">
 	<table class="table">
 		<tr>
 			<th> Title</th>
 			<th>Address</th>
-			<th>Price</th>
+			<th><%= filterrific_sorting_link(@filterrific, :price) %></th>
 			<th>Show</th>
 			<th>Edit</th>
 			<th>Destroy</th>
+			<th>Reserve</th>
 		</tr>
 		<% listings.each do |listing| %>
 			<tr>
@@ -17,7 +21,8 @@
 				<% if signed_in? and current_user.id == listing.user_id %>
 					<td><%= link_to "Edit", edit_listing_path(listing) %></td>
 					<td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-				<% end %>	
+				<% end %>
+				<td><%= link_to 'Book this Place', new_listing_booking_path(listing) %>	
 			</tr>	
 		<%end%>		
 	</table>

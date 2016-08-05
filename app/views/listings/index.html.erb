@@ -1,3 +1,7 @@
+<% if @errors %>
+  <%= @errors %>
+<% end %> 
+
 <%= form_for_filterrific @filterrific do |f| %>
   <div>
     Search
@@ -6,6 +10,13 @@
       class: 'filterrific-periodically-observed'
     ) %>
   </div>
+
+  <div>
+    Sorted by
+    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+  </div>
+
+
   <div>
     <%= link_to(
       'Reset filters',

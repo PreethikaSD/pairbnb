@@ -1,0 +1,2 @@
+class AvailableDatesController < ApplicationController
+end

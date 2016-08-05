@@ -4,7 +4,10 @@ class ListingsController < ApplicationController
 	def index
   		@filterrific = initialize_filterrific(
     	Listing,
-    	params[:filterrific]
+    	params[:filterrific],
+    	select_options: {
+    		sorted_by: Listing.options_for_sorted_by
+    	}
 	  	) or return
 	  	@listings = @filterrific.find
 

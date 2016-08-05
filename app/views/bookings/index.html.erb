@@ -1,0 +1,21 @@
+<table class="table">
+	<tr>
+		<th>Start Date</th>
+		<th>End Date</th>
+		<th>Number of Guests</th>
+		<th>Show</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% @bookings.each do |booking|%>
+	<tr>
+		<td><%=booking.start_date%></td>
+		<td><%=booking.end_date%></td>
+		<td><%=booking.guest%></td>
+		<td><%= link_to 'Show', listing_path(booking.listing_id) %></td>
+		<td><%= link_to "Edit", edit_booking_path(booking) %></td>
+		<td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+	<%end%>
+</table>	
+
