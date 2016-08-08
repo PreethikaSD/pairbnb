@@ -15,7 +15,8 @@ class BookingsController < ApplicationController
         	@booking = current_user.bookings.new(booking_params)
         	@booking.listing = @listing
 			if @booking.save
-				BookingMailer.booking_email(@booking, @listing).deliver_now
+				#BookingMailer.booking_email(@booking, @listing).deliver_later
+				MailJob.perform_later(@booking, @listing)
 				reserve_dates(@booking.start_date, @booking.end_date, @listing.id)
 	        	redirect_to bookings_path
 	      	else
@@ -36,6 +37,15 @@ class BookingsController < ApplicationController
 		set_listing
 		@booking = Booking.find(params[:id])
 	end
+
+	def destroy
+		@booking = Booking.find(params[:id])
+		@booking.destroy
+    	respond_to do |format|
+      		format.html { redirect_to listings_url, notice: 'Booking was successfully destroyed.' }
+    	end
+	end
+
 
 	private
 
