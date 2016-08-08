@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
         	@booking = current_user.bookings.new(booking_params)
         	@booking.listing = @listing
 			if @booking.save
+				BookingMailer.booking_email(@booking, @listing).deliver_now
 				reserve_dates(@booking.start_date, @booking.end_date, @listing.id)
 	        	redirect_to bookings_path
 	      	else
