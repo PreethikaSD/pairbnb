@@ -2,20 +2,21 @@
 <%= link_to "My Bookings", bookings_path%>
 <h3>Your Bookings </h3>
 <% if current_user.bookings %>
-	<% current_user.bookings.each do |booking|%>
-		<table>
+		<table class="table">
 			<tr>
 				<th>From Date</th>
 				<th>To Date</th>
 				<th>Num of Guest</th>
 				<th>Booked at</th>
 			</tr>
+			<% current_user.bookings.each do |booking|%>
 			<tr>
-				<td>booking.start_date</td>
-				<td>booking.end_date</td>
-				<td>booking.guest</td>
+				<td><%=booking.start_date%></td>
+				<td><%=booking.end_date%></td>
+				<td><%=booking.guest%></td>
 				<td><%=Listing.find(booking.listing_id).title%></td>
-			</tr>	
+			</tr>
+			<%end%>	
+	
 		</table>
-	<%end%>	
 <%end%>
