@@ -8,8 +8,13 @@
   <%= form.label :Price %>
   <%= form.text_field :price%><br>
 
+  <%= form.label :country_code %>
+  <%= form.country_select :country_code, {selected: "SG"} %>
+
   <%= form.label :tag %>
   <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, :item_wrapper_class => 'block' %>
+
+  <%= form.file_field :avatars, multiple: true %>
 
   <%= form.submit %>
 <%end%>

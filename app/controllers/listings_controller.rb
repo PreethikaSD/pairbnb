@@ -6,7 +6,9 @@ class ListingsController < ApplicationController
     	Listing,
     	params[:filterrific],
     	select_options: {
-    		sorted_by: Listing.options_for_sorted_by
+    		sorted_by: Listing.options_for_sorted_by,
+    		with_country_id: Listing.countries_with_listings,
+    		with_tag_ids: Tag.options_for_select
     	}
 	  	) or return
 	  	@listings = @filterrific.find
@@ -67,7 +69,7 @@ class ListingsController < ApplicationController
 	private
 
 	def listing_params
-        params.require(:listing).permit(:title, :address, :price, tag_ids: [])
+        params.require(:listing).permit(:title, :address, :price, :country_code, tag_ids: [], avatars: [])
     end
 
 

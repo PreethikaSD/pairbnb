@@ -35,6 +35,14 @@ gem 'filterrific'
 
 gem 'bootstrap-datepicker-rails'
 
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+
+gem 'mini_magick'
+
+gem 'fog'
+
+gem 'country_select'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

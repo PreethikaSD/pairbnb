@@ -2,31 +2,7 @@
   <%= @errors %>
 <% end %> 
 
-<%= form_for_filterrific @filterrific do |f| %>
-  <div>
-    Search
-    <%= f.text_field(
-      :search_query,
-      class: 'filterrific-periodically-observed'
-    ) %>
-  </div>
-
-  <div>
-    Sorted by
-    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-  </div>
-
-
-  <div>
-    <%= link_to(
-      'Reset filters',
-      reset_filterrific_url,
-    ) %>
-  </div>
-  <%# add an automated spinner to your form when the list is refreshed %>
-  <%= render_filterrific_spinner %>
-<% end %>
-
+<%= render "listings/filterrific_form"%>
 <%= render( partial: 'listings/list', locals: { listings: @listings } ) %>
 
 <%= link_to 'Create a listing', new_listing_path %> 

@@ -14,13 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require bootstrap-sprockets
 //= require filterrific/filterrific-jquery
 //= require bootstrap-datepicker
-
-$(document).ready(function(){
-   $('.input-daterange').datepicker({
-       multidate: false
-      
-   });
-});
+//= require bookings.js
+//= require bootstrap.js

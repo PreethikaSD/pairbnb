@@ -1,26 +1,39 @@
-
-<p>
-  <strong>Title:</strong>
-  <%= @listing.title%>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @listing.address %>
-</p>
-
-<p>
-  <strong>Price</strong>
-  <%= @listing.price %>
-</p>
-
-<p>
-<strong>Tag:</strong>
-<% @listing.tags.each do |tag|%>
-	<%= tag.name + ',' %>
+<%if @listing %>
+	<table class="table">
+		<tr>
+			<th> Title</th>
+			<th>Address</th>
+			<th>Price</th>
+			<th>Tag</th>
+			<th>Country</th>
+			<th>Show</th>
+			<th>Edit</th>
+			<th>Destroy</th>
+			<th>Reserve</th>
+		</tr>
+		<tr>
+			<td><%=@listing.title%></td>
+			<td><%=@listing.address%></td>
+			<td><%=@listing.price%></td>
+			<td><% @listing.tags.each do |tag|%>
+				<%= tag.name + ',' %>
+			<% end %>	
+			<td><%=@listing.country_code%></td>
+			<td><%= link_to 'Show', @listing %></td>
+			<% if signed_in? and current_user.id == @listing.user_id %>
+				<td><%= link_to "Edit", edit_listing_path(@listing) %></td>
+				<td><%= link_to 'Destroy', @listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<% end %>
+			<td><%= link_to 'Book this Place', new_listing_booking_path(@listing) %>	
+		</tr>	
+	</table>
+<%end%>
+<br>
+<% if @listing.avatars %>
+	<% @listing.avatars.each do |avatar| %>
+		<%= image_tag(avatar) %>
+	<% end %>	
 <% end %>	
+<br>
+<%= link_to 'Back', listings_path %><br>
 
-<% if current_user.id == @listing.user_id %>
-	<%= link_to 'Edit', edit_listing_path(@listing) %> 
-<% end %>	
-<%= link_to 'Back', listings_path %>
