@@ -17,4 +17,5 @@
 //= require filterrific/filterrific-jquery
 //= require bootstrap-datepicker
 //= require bookings.js
-//= require bootstrap.js
+//= require bootstrap
+
