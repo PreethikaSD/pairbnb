@@ -1,7 +1,6 @@
 <% if @errors %>
   <%= @errors %>
 <% end %> 
-
 <%= render "listings/filterrific_form"%>
 <%= render( partial: 'listings/list', locals: { listings: @listings } ) %>
 

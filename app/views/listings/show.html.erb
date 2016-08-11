@@ -31,7 +31,7 @@
 <br>
 <% if @listing.avatars %>
 	<% @listing.avatars.each do |avatar| %>
-		<%= image_tag(avatar) %>
+		<%= image_tag(avatar.sizing) %>
 	<% end %>	
 <% end %>	
 <br>
