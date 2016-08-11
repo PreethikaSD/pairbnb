@@ -1,0 +1,20 @@
+<%if @results %>
+<div class="container">
+  <div class="row">
+  <%@results.each do |result|%>
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><%=result.title%></div>
+        <div class="panel-body"><img src="<%=result.avatars_urls.first%>" class="img-responsive" style="width:325px; height:200px;" alt="Image"></div>
+        <div class="panel-footer">
+        <%= link_to 'Book Now', new_listing_booking_path(result) %> 
+        <p class="pull-right"><%= link_to 'More Info', result %></p>
+        </div>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
+</div>
+<%end%>
+<%= link_to 'Back to Listings', listings_url %>

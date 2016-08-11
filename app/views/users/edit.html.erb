@@ -11,9 +11,15 @@
 </div>
 
 <div> 
- 	<%= form.file_field :avatar, multiple: false %>
+   <%= form.label :upload_avatar %>
+   <%= form.file_field :avatar, multiple: false %>
 </div>
-
+<p>
+    <label>
+      <%= form.check_box :remove_avatar %>
+      Remove avatar
+    </label>
+</p>
    <%= form.submit %>
 
 <%end%>

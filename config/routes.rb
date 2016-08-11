@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   resources :bookings do 
     resources :payments, only: [:new, :create]
   end  
+
+  get "/search" => "listings#search"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

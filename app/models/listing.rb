@@ -5,7 +5,8 @@ class Listing < ActiveRecord::Base
 	has_many :tags, :through => :listing_tags
 	has_many :bookings
 	has_many :available_dates
-
+  searchkick
+  
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },
     available_filters: [

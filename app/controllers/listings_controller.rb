@@ -19,6 +19,10 @@ class ListingsController < ApplicationController
   		end
 	end
 
+	def search
+		@results = Listing.search(params[:search_result])
+	end	
+
 	def new
 		if signed_in?
 			@listing = Listing.new
