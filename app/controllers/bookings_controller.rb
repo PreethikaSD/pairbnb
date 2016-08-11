@@ -16,9 +16,11 @@ class BookingsController < ApplicationController
         	@booking.listing = @listing
 			if @booking.save
 				#BookingMailer.booking_email(@booking, @listing).deliver_later
+				#DeleteBookingJob.perform_in(1.minutes.from_now, @booking)
+				DeleteBookingJob.set(wait: 1.minutes).perform_later(@booking)
 				MailJob.perform_later(@booking, @listing)
 				reserve_dates(@booking.start_date, @booking.end_date, @listing.id)
-	        	redirect_to bookings_path
+	        	redirect_to new_booking_payment_path(@booking)
 	      	else
 	      		@errors = @booking.errors.full_messages
 	        	redirect_to listings_path

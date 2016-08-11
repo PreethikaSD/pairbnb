@@ -18,4 +18,4 @@
 //= require bootstrap-datepicker
 //= require bookings.js
 //= require bootstrap
-
+//= require payments.coffee
