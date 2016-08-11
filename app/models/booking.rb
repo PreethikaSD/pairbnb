@@ -1,6 +1,7 @@
 class Booking < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :listing
+    has_many :payments
     validate :check_overlapping_bookings
 
     def check_overlapping_bookings

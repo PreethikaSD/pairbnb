@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'payments/new'
+
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
 
   resources :bookings
 
+  resources :bookings do 
+    resources :payments, only: [:new, :create]
+  end  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

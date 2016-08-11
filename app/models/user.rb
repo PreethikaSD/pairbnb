@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
    has_many :listings
    has_many :bookings
+   has_many :payments
 
   has_many :authentications, :dependent => :destroy
 

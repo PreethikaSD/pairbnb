@@ -45,6 +45,10 @@ gem 'country_select'
 
 gem 'sidekiq'
 
+gem 'braintree'
+
+gem 'gon'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
