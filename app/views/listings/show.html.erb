@@ -35,5 +35,17 @@
 	<% end %>	
 <% end %>	
 <br>
+  <div class="container">
+    <div class="row">
+    <%@listing.avatars.each do |avatar|%>
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-body"><img src="<%=avatar%>" class="img-responsive" style="width:325px; height:200px;" alt="Image"></div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </div>
+
 <%= link_to 'Back', listings_path %><br>
 
