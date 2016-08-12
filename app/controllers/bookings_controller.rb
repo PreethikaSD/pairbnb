@@ -31,7 +31,6 @@ class BookingsController < ApplicationController
 	end
 
 	def show
-		set_listing
 		@booking = Booking.find(params[:id])
 	end
 
