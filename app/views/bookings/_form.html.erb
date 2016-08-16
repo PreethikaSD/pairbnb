@@ -1,14 +1,16 @@
 <%= form_for [@listing, @booking] do |f| %>
-   <div class="input-daterange input-group" id="datepicker">
-       <%= f.text_field :start_date, class: "input-sm form-control" %>
-       <span class="input-group-addon">to</span>
-       <%= f.text_field :end_date, class: "input-sm form-control"%>
-   </div>
-    <div>
-     	<%= f.label :guest %>
-  	 	<%= f.number_field :guest%>
+  <div class="input-daterange input-group" id="datepicker">
+    <%= f.text_field :start_date, class: "input-sm form-control" %>
+    <span class="input-group-addon">to</span>
+    <%= f.text_field :end_date, class: "input-sm form-control"%>
+  </div>
+  <div>
+    <%= f.label :guest %>
+  	<%= f.number_field :guest%>
 	</div>
+  <div>
    <%= f.submit "Submit"%>
+   </div>
 <% end %>
 
 
