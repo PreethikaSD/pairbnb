@@ -29,12 +29,6 @@
 	</table>
 <%end%>
 <br>
-<% if @listing.avatars %>
-	<% @listing.avatars.each do |avatar| %>
-		<%= image_tag(avatar.sizing) %>
-	<% end %>	
-<% end %>	
-<br>
   <div class="container">
     <div class="row">
     <%@listing.avatars.each do |avatar|%>
