@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'static#home'
+  root 'listings#index'
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
 

@@ -34,6 +34,8 @@ class ListingsController < ApplicationController
 	def create
 		if signed_in? and current_user
 			@listing = current_user.listings.create(listing_params)
+			@listing.country_name = country_name
+			@listing.save
 			respond_to do |format|
 				if @listing.save
 		        	format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
@@ -80,6 +82,11 @@ class ListingsController < ApplicationController
 	def find_listing
         @listing = Listing.find(params[:id])
     end
+
+    def country_name
+    	country_name = ISO3166::Country[params[:listing][:country_code]].name
+    end
+
 end
 
   
