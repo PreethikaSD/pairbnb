@@ -1,4 +1,3 @@
-<div class="container">
   <div class="row">
     <div class="col-md-6">
       <%= form_for [@listing, @booking] do |f| %>
@@ -7,15 +6,16 @@
           <span class="input-group-addon">to</span>
           <%= f.text_field :end_date, class: "input-sm form-control", placeholder: "To Date"%>
         </div>
+        <br>
         <div>
-          <%= f.label :guest %>
+          <%= f.label :number_of_guest %>
         	<%= f.number_field :guest%>
       	</div>
+        <br>
         <div>
          <%= f.submit "Submit"%>
          </div>
       <% end %>
     </div>
   </div>
-</div>
 

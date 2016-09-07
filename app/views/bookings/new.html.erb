@@ -1,5 +1,7 @@
+<div class="container" style="border: 1px solid gray;">
 <h1>Booking at <%=Listing.find(params[:listing_id]).title%></h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Back', bookings_path %>
+</div>

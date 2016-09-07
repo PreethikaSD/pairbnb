@@ -9,7 +9,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" >
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -40,13 +40,14 @@
         <li><a href="listings/new">Become a Host</a></li>
         <% if current_user %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle"  value="<%=current_user.email%>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.email%> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle"  value="<%=current_user.email%>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.email%> 
+             <span class="caret"></span></a>
         <%end%>    
           <ul class="dropdown-menu">
             <% if signed_in? and current_user %>
               <li><%= link_to "My Profile", user_path(current_user) %></li>
               <% if current_user.listings %>
-                <li><a href="/listings">My Listings</a></li> 
+                <li><a href="/my_listings">My Listings</a></li> 
               <%end%>
               <% if current_user.bookings %>                
                 <li><a href="/bookings">My bookings</a></li> 
@@ -66,6 +67,7 @@
 </nav>
 
   	<%= yield %>
+    
 <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" width="900px">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -74,32 +76,53 @@
         <h4 class="modal-title" id="myModalLabel">Login Page</h4>
       </div>
       <%= form_for :session, url: session_path do |form| %>
-        <div class="text-field">
-          <%= form.label :email %>
-          <%= form.text_field :email, type: 'email' %>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <div class="text-field">
+              <%= form.label :email %>
+              <%= form.text_field :email, type: 'email', class: 'form-control' %>
+            </div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6"> 
+            <div class="password-field">
+              <%= form.label :password %>
+              <%= form.password_field :password, class: 'form-control' %>
+            </div>
+          </div>
         </div>
-
-        <div class="password-field">
-          <%= form.label :password %>
-          <%= form.password_field :password %>
-        </div>
-
-        <div class="submit-field">
-          <%= form.submit %>
-        </div>
-
-        <div class="other-links">
-          <% if Clearance.configuration.allow_sign_up? %>
-            <%= link_to t(".sign_up"), sign_up_path %>
-          <% end %>
-          <%= link_to t(".forgot_password"), new_password_path %>
-        </div>
-      <% end %>
-      <%= link_to "Sign in with facebook", "/auth/facebook" %>
+        <br>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-3">    
+            <div class="submit-field">
+              <%= form.submit %>
+            </div>
+          </div> 
+        </div>  
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <div class="other-links">
+              <% if Clearance.configuration.allow_sign_up? %>
+                <%= link_to t(".sign_up"), sign_up_path %>
+              <% end %>
+              <%= link_to t(".forgot_password"), new_password_path %>
+            </div>  
+          </div>
+        </div>              
+        <% end %>
+        <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <%= link_to "Sign in with facebook", "/auth/facebook" %>
+        </div>  
     </div>
   </div>
 </div>
-
 </body>
 </html>
 

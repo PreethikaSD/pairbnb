@@ -1,21 +1,46 @@
-<%= form_for(@listing) do |form| %>
-  <%= form.label :Title %>
-  <%= form.text_field :title%>
+<div class="row"> 
+  <div class="col-md-3">
+  <%= form_for(@listing) do |form| %>
+    <%= form.label :Title %>
+    <%= form.text_field :title, class: "form-control"%>
+  </div>
+</div>
 
-  <%= form.label :Address %>
-  <%= form.text_field :address%>
+<div class="row"> 
+  <div class="col-md-3">
+    <%= form.label :Address %>
+    <%= form.text_field :address, class: "form-control"%>
+  </div>
+</div>  
 
-  <%= form.label :Price %>
-  <%= form.text_field :price%><br>
+<div class="row"> 
+  <div class="col-md-3">
+    <%= form.label :Price %>
+    <%= form.text_field :price, class: "form-control"%>
+  </div>
+</div>
 
-  <%= form.label :country_code %>
-  <%= form.country_select :country_code, {selected: "SG"} %>
+<div class="row"> 
+  <div class="col-md-3">
+    <%= form.label :country_code %>
+    <%= form.country_select :country_code, {selected: "SG"}, class: "form-control" %>
+  </div>
+</div>
+<br>
+<div class="row"> 
+  <div class="col-md-9">    
+    <%= form.label :tag %>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, :item_wrapper_class => 'block' , class: "form-control"%>
+  </div>
+</div>    
 
-  <%= form.label :tag %>
-  <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name, :item_wrapper_class => 'block' %>
-
-  <%= form.file_field :avatars, multiple: true %>
-  <p>
+<div class="row"> 
+  <div class="col-md-3">
+    <%= form.label :Upload_pictures %>
+    <%= form.file_field :avatars, multiple: true %>
+  </div>
+</div>  
+<p>
     <label>
       <%= form.check_box :remove_avatars %>
       Remove avatars

@@ -1,0 +1,8 @@
+<div class="container" style="color: #999999;">
+<h3>Congratulations! Your transaction has been successfull!</h3>
+<h4> Your booking has been made at <b><%= @booking.listing.title %></b> from <%=@booking.start_date%>
+to <%= @booking.end_date %> for <%=@booking.guest%> guest(s).</h4>
+
+<h4>Click here for more info </h4>
+<%= link_to 'More info', listing_path(@booking.listing.id) %>
+</div>
