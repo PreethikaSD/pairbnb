@@ -1,8 +1,9 @@
-<% if @errors %>
-  <%= @errors %>
-<% end %> 
-<%= render "listings/filterrific_form"%>
-<%= render( partial: 'listings/list', locals: { listings: @listings } ) %>
+<div class="container">
+	<% if @errors %>
+	  <%= @errors %>
+	<% end %> 
+	<%= render "listings/filterrific_form"%>
+	<%= render( partial: 'listings/list', locals: { listings: @listings } ) %>
 
-<%= link_to 'Create a listing', new_listing_path %> 
-
+	<%= link_to 'Create a listing', new_listing_path %> 
+</div>
