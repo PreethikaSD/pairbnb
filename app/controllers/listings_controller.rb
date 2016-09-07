@@ -72,6 +72,10 @@ class ListingsController < ApplicationController
     	end
 	end
 
+	def my_listings
+		@listings = current_user.listings
+	end
+		
 	private
 
 	def listing_params

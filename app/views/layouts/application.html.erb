@@ -47,7 +47,7 @@
             <% if signed_in? and current_user %>
               <li><%= link_to "My Profile", user_path(current_user) %></li>
               <% if current_user.listings %>
-                <li><a href="/listings">My Listings</a></li> 
+                <li><a href="/my_listings">My Listings</a></li> 
               <%end%>
               <% if current_user.bookings %>                
                 <li><a href="/bookings">My bookings</a></li> 

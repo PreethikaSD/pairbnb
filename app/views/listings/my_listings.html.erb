@@ -1,0 +1,23 @@
+<div class="container" style="border: 1px solid gray;">
+<% if @listings %>
+	<h3> My Listings </h3>
+	<table class="table">
+		<tr>
+			<th>Title</th>
+			<th>Address</th>
+			<th>Price</th>
+			<th>Country</th>
+			<th>More Info</th>
+		</tr>
+		<% @listings.each do |listing|%>
+		<tr>
+			<td><%=listing.title%></td>
+			<td><%=listing.address%></td>
+			<td><%=listing.price%></td>
+			<td><%=listing.country_name%></td>
+			<td><%= link_to 'Show', listing_path(listing) %></td>
+		</tr>
+		<%end%>
+	</table>	
+<%end%>
+</div>
