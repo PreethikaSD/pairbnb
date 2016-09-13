@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+	before_action :require_login,  only: [:index, :create, :new, :show, :edit, :destroy]
 
 	def index
 		@bookings = current_user.bookings.all
@@ -10,24 +11,20 @@ class BookingsController < ApplicationController
 	end
 
 	def create
-		if signed_in? and current_user
-        	set_listing
-        	@booking = current_user.bookings.new(booking_params)
-        	@booking.listing = @listing
-			if @booking.save
-				#BookingMailer.booking_email(@booking, @listing).deliver_later
-				#DeleteBookingJob.perform_in(1.minutes.from_now, @booking)
-				DeleteBookingJob.set(wait: 1.minutes).perform_later(@booking)
-				MailJob.perform_later(@booking, @listing)
-				reserve_dates(@booking.start_date, @booking.end_date, @listing.id)
-	        	redirect_to new_booking_payment_path(@booking)
-	      	else
-	      		@errors = @booking.errors.full_messages
-	        	redirect_to listings_path
-	      	end
-		else
-			redirect_to '/sign_in', notice: 'You are not logged in' 
-		end    
+    	set_listing
+    	@booking = current_user.bookings.new(booking_params)
+    	@booking.listing = @listing
+		if @booking.save
+			#BookingMailer.booking_email(@booking, @listing).deliver_later
+			#DeleteBookingJob.perform_in(1.minutes.from_now, @booking)
+			DeleteBookingJob.set(wait: 1.minutes).perform_later(@booking)
+			MailJob.perform_later(@booking, @listing)
+			reserve_dates(@booking.start_date, @booking.end_date, @listing.id)
+        	redirect_to new_booking_payment_path(@booking)
+      	else
+      		@errors = @booking.errors.full_messages
+        	redirect_to listings_path
+      	end
 	end
 
 	def show
@@ -71,5 +68,13 @@ class BookingsController < ApplicationController
     		available_date.save
     	end	
     end
+
+    def require_login
+		unless signed_in?
+			flash[:alert] = "You must be logged in to access this section"
+			redirect_to '/sign_in'
+		end
+	end
+
 
 end
