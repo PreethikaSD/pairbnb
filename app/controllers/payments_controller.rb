@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_action :require_login,  only: [:new, :create]
+
   def new
   	@payment = Payment.new
   	@amount = calculate_amount
@@ -25,17 +27,23 @@ class PaymentsController < ApplicationController
 		Braintree::ClientToken.generate
 	end
 
-  	def calculate_amount
-  		if Booking.find(params[:booking_id])
-  			@booking = Booking.find(params[:booking_id])	  	
-		  	@listing = @booking.listing
-		  	duration = (@booking.start_date..@booking.end_date).to_a.count
-		  	duration * @listing.price
+  def calculate_amount
+		if Booking.find(params[:booking_id])
+			@booking = Booking.find(params[:booking_id])	  	
+	  	@listing = @booking.listing
+	  	duration = (@booking.start_date..@booking.end_date).to_a.count
+	  	duration * @listing.price
 		else
-		  	flash[:alert] = "Your booking is invalid. Please try again!"
-		    redirect_to new_booking_payment_path(@booking)
+		  flash[:alert] = "Your booking is invalid. Please try again!"
+		  redirect_to new_booking_payment_path(@booking)
 		end 
+  end
 
+  def require_login
+    unless signed_in?
+      flash[:alert] = "You must be logged in to access this section"
+      redirect_to '/sign_in'
+    end
+  end
 
-  	end
 end

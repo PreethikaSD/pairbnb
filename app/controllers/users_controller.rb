@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :require_login,  only: [:index, :update, :show, :edit]
 
 	def index
 		@users = User.all
@@ -26,6 +27,13 @@ class UsersController < ApplicationController
 	def user_params
         params.require(:user).permit(:email, :password, :avatar, :remove_avatar)
     end
+
+    def require_login
+		unless signed_in?
+			flash[:alert] = "You must be logged in to access this section"
+			redirect_to '/sign_in'
+		end
+	end
 
 end
 

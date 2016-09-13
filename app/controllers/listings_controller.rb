@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
 	before_action :find_listing, only: [:show, :edit, :update, :destroy]
+	before_action :require_login,  only: [:new, :create, :update, :destroy, :my_listings]
 
 	def index
   		@filterrific = initialize_filterrific(
@@ -24,28 +25,20 @@ class ListingsController < ApplicationController
 	end	
 
 	def new
-		if signed_in?
-			@listing = Listing.new
-		else
-			redirect_to '/sign_in', notice: 'You are not logged in' 
-		end	
+		@listing = Listing.new
 	end
 
 	def create
-		if signed_in? and current_user
-			@listing = current_user.listings.create(listing_params)
-			@listing.country_name = country_name
-			@listing.save
-			respond_to do |format|
-				if @listing.save
-		        	format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
-		      	else
-		        	format.html { render :new }
-		      	end
-		    end
-		else
-			redirect_to '/sign_in', notice: 'You are not logged in' 
-		end    
+		@listing = current_user.listings.create(listing_params)
+		@listing.country_name = country_name
+		@listing.save
+		respond_to do |format|
+			if @listing.save
+	        	format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
+	      	else
+	        	format.html { render :new }
+	      	end
+	    end
 	end
 	
 	def edit
@@ -72,11 +65,12 @@ class ListingsController < ApplicationController
     	end
 	end
 
+	private
+
 	def my_listings
 		@listings = current_user.listings
 	end
 		
-	private
 
 	def listing_params
         params.require(:listing).permit(:title, :address, :price, :country_code, :remove_avatars, tag_ids: [], avatars: [])
@@ -90,6 +84,13 @@ class ListingsController < ApplicationController
     def country_name
     	country_name = ISO3166::Country[params[:listing][:country_code]].name
     end
+
+    def require_login
+		unless signed_in?
+			flash[:alert] = "You must be logged in to access this section"
+			redirect_to '/sign_in'
+		end
+	end
 
 end
 
